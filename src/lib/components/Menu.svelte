@@ -19,7 +19,7 @@
 <div class="flex flex-col gap-8 laptop:grid laptop:grid-cols-2
         justify-center items-center laptop:justify-between 
         text-12 laptop:text-14
-        w-full pt-16">
+        w-full">
         <img src={logo} alt="exoda_logo"/>
 
         <div class="grid grid-cols-3 justify-between gap-8 bg-dark-4 rounded-full cursor-pointer">
