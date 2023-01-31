@@ -1,21 +1,45 @@
 <script lang="ts">
     import logo from '$lib/icons/logo.svg'
+    import { page } from '$app/stores'
+
+    enum MenuItem {
+        EXPENSES = 'expenses',
+        EXCHANGE_WALLETS = 'exchange-wallets',
+        TRANSACTIONS = 'transactions'
+    }
+
+    let active: string
+
+    $: {
+        const urlParts = $page.url.pathname.split('/') 
+        active = urlParts[urlParts.length - 1]
+    }
 </script>
 
 <div class="flex flex-col gap-8 laptop:grid laptop:grid-cols-2
-            justify-center items-center laptop:justify-between 
-            w-full pt-16">
+        justify-center items-center laptop:justify-between 
+        text-12 laptop:text-14
+        w-full pt-16">
         <img src={logo} alt="exoda_logo"/>
 
         <div class="grid grid-cols-3 justify-between gap-8 bg-dark-4 rounded-full cursor-pointer">
-            <div class="flex bg-primary rounded-full h-full py-16 items-center justify-center">
-                <span>Expenses</span>
-            </div>
-            <div class="flex rounded-full h-full py-16 items-center justify-center">
-                <span>Exchange wallets</span>
-            </div>
-            <div class="flex rounded-full h-full py-16 items-center justify-center">
-                <span>Transactions</span>
-            </div>
+            <a href="/app/expenses">
+                <div class="flex rounded-full h-full p-8 laptop:py-16 items-center justify-center"
+                    class:bg-primary="{ active === MenuItem.EXPENSES }">
+                    <span>Expenses</span>
+                </div>
+            </a>
+            <a href="/app/exchange-wallets">
+                <div class="flex rounded-full h-full p-8 laptop:py-16 items-center justify-center"
+                    class:bg-primary="{ active === MenuItem.EXCHANGE_WALLETS }">
+                    <span>Exchange wallets</span>
+                </div>
+            </a>
+            <a href="/app/transactions">
+                <div class="flex rounded-full h-full p-8 laptop:py-16 items-center justify-center"
+                    class:bg-primary="{ active === MenuItem.TRANSACTIONS }">
+                    <span>Transactions</span>
+                </div>
+            </a>
         </div>
 </div>
