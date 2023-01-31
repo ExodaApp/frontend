@@ -1,7 +1,5 @@
 <script lang="ts">
 </script>
 
-<h1>
-    Expenses
-</h1>
+<h1>Expenses</h1>
 

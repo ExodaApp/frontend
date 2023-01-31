@@ -23,6 +23,7 @@ module.exports = {
             primary: 'rgba(92, 26, 233, 0.5)',
             'primary-solid': 'rgba(92, 26, 233, 1)',
             white: '#CBCBCB',
+            'dark-0': 'rgba(0, 0, 0, 0.8)',
             'dark-1': 'rgba(0, 0, 0, 0.4)',
             'dark-2': 'rgba(17, 17, 17, 0.75)',
             'dark-3': 'rgba(21, 21, 21, 0.90)',
@@ -60,6 +61,7 @@ module.exports = {
             320: '320px',
             400: '400px',
             480: '480px',
+            560: '560px',
         },
 
         maxWidth: {
