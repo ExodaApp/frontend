@@ -13,7 +13,7 @@
         </div>
 
         <!-- Content -->
-        <div class="w-full h-full bg-red">
+        <div class="w-full h-full">
             <slot/>
         </div>
     </div>
