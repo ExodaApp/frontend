@@ -18,7 +18,7 @@
 
 <div class="flex flex-col gap-8 laptop:grid laptop:grid-cols-2
         justify-center items-center laptop:justify-between 
-        text-12 laptop:text-14
+        text-12 font-lexend font-600 laptop:text-16
         w-full">
         <img src={logo} alt="exoda_logo"/>
 

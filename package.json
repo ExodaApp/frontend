@@ -34,5 +34,10 @@
 		"vite": "^4.0.0",
 		"vitest": "^0.25.3"
 	},
-	"type": "module"
+	"type": "module",
+	"dependencies": {
+		"@fontsource/lexend-deca": "^4.5.14",
+		"@fontsource/plus-jakarta-sans": "^4.5.11",
+		"@fontsource/syne": "^4.5.13"
+	}
 }

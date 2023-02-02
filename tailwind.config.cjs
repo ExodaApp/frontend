@@ -106,8 +106,9 @@ module.exports = {
         },
 
         fontFamily: {
-            mono: ['IBM Plex Mono'],
-            default: ['Outfit'],
+            lexend: ['Lexend Deca'],
+            syne: ['Syne'],
+            jakarta: ['Plus Jakarta Sans']
         },
 
         lineHeight: {
