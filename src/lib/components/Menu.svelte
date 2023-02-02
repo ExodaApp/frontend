@@ -18,7 +18,7 @@
 
 <div class="flex flex-col gap-8 laptop:grid laptop:grid-cols-2
         justify-center items-center laptop:justify-between 
-        text-12 font-lexend font-600 laptop:text-16
+        text-12 font-lexend font-600 laptop:text-14
         w-full">
         <img src={logo} alt="exoda_logo"/>
 
@@ -32,7 +32,7 @@
             <a href="/app/exchange-wallets">
                 <div class="flex rounded-full h-full p-8 laptop:py-16 items-center justify-center"
                     class:bg-primary="{ active === MenuItem.EXCHANGE_WALLETS }">
-                    <span>Exchange wallets</span>
+                    <span>Exchanges</span>
                 </div>
             </a>
             <a href="/app/transactions">

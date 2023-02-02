@@ -8,19 +8,23 @@ interface Modal {
     data: any
 }
 
-const defaultModalValue: Modal = {
+const defaultModal: Modal = {
     component: null,
     open: false,
     dismissible: false,
     data: null,
 }
 
-export const modal: Writable<Modal> = writable(defaultModalValue)
+export const modal: Writable<Modal> = writable(defaultModal)
 
-export function openModal(newModal: Modal) {
-    modal.set(newModal)
+export function openModal(component: SvelteComponent) {
+    modal.update((modal => ({
+        ...modal,
+        component,
+        open: true,
+    })))
 }
 
 export function closeModal() {
-    modal.set(defaultModalValue)
+    modal.set(defaultModal)
 }

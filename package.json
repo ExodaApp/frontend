@@ -36,8 +36,11 @@
 	},
 	"type": "module",
 	"dependencies": {
+		"@ethersproject/providers": "^5.7.2",
 		"@fontsource/lexend-deca": "^4.5.14",
 		"@fontsource/plus-jakarta-sans": "^4.5.11",
-		"@fontsource/syne": "^4.5.13"
+		"@fontsource/syne": "^4.5.13",
+		"@metamask/detect-provider": "^2.0.0",
+		"ethers": "^5.7.2"
 	}
 }
