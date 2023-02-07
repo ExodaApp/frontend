@@ -16,6 +16,8 @@
     const walletService = new WalletService(walletProvider)
 
     onMount(() => {
+        console.log({ user: $user.address })
+
         if(!$user.address)
             openModal(Authenticate)
     })
