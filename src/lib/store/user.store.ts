@@ -1,6 +1,6 @@
 import { writable } from "svelte/store";
 
-interface IUserInfo {
+export interface IUserInfo {
     address: string | null
     jwt: string | null
     walletConnected: boolean,
