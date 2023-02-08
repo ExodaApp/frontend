@@ -11,7 +11,7 @@ const defaultUser: IUserInfo = {
     walletConnected: false,
     address: null,
     jwt: null,
-    authenticated: true
+    authenticated: false,
 }
 
 export const user = writable<IUserInfo>(defaultUser)

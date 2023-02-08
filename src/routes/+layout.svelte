@@ -6,7 +6,7 @@
     import { onMount } from 'svelte'
     import { walletProvider } from '$lib/store/wallet-provider.store'
     import { user, setUserAddress } from '$lib/store/user.store'
-    import { openModal } from '$lib/store/modal.store'
+    import { modal, openModal, closeModal } from '$lib/store/modal.store'
     import { WalletService } from '$lib/services/WalletService'
     import Menu from '$lib/components/Menu.svelte'
     import Modal from '$lib/components/Modal.svelte'
@@ -15,20 +15,18 @@
 
     const walletService = new WalletService(walletProvider)
 
-    onMount(() => {
-        console.log({ user: $user.address })
-
-        if(!$user.address)
+    $: {
+        if (!$user.authenticated)
             openModal(Authenticate)
-    })
 
-    const connectWallet = async () => {
-        const userAddress = await walletService.connect()
-        setUserAddress(userAddress)
+        if ($user.authenticated && $modal.open)
+            closeModal()
     }
 </script>
 
-<Modal/>
+{ #if $modal.open }
+    <Modal/>
+{/if}
 
 <div class="w-full h-screen bg-[url('/app-bg.jpg')] bg-cover bg-center flex justify-center">
     <div class="flex flex-col
@@ -43,8 +41,6 @@
         <div class="w-full h-full">
             <slot/>
         </div>
-
-        <button on:click="{connectWallet}">Connect wallet</button>
     </div>
 </div>
 

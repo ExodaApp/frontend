@@ -26,5 +26,7 @@ export function openModal(component: SvelteComponent) {
 }
 
 export function closeModal() {
+    console.log('Closing modal')
+
     modal.set(defaultModal)
 }

@@ -1,21 +1,44 @@
 <script lang="ts">
     import { walletProvider } from '$lib/store/wallet-provider.store'
     import { user, setUserAddress, setJwt } from '$lib/store/user.store'
+    import wallet from '$lib/images/wallet.png'
+
     import { WalletService } from '$lib/services/WalletService'
     import { UserService } from '$lib/services/UserService'
     import { AuthService } from '$lib/services/AuthService'
 
+    import Button from '$lib/components/Button.svelte'
+
+    let loading = false
+
     const handleAuthentication = async () => {
-        const userAddress = await WalletService.connect() 
-        const nonce = await UserService.getNonce(userAddress)
+        try {
+            loading = true
 
-        const signature = await WalletService.signMessage(`${ nonce }`)
-        const jwt = await AuthService.authenticate(userAddress, signature)
+            const userAddress = await WalletService.connect() 
+            const nonce = await UserService.getNonce(userAddress)
 
-        setJwt(jwt)
-        setUserAddress(userAddress)
+            const signature = await WalletService.signMessage(`${ nonce }`)
+            const jwt = await AuthService.authenticate(userAddress, signature)
+
+            setJwt(jwt)
+            setUserAddress(userAddress)
+        } catch (error) {
+
+        } finally {
+            loading = false
+        }
     }
 </script>
 
-<h1>Not Connected</h1>
-<button on:click="{ handleAuthentication }">Connect wallet</button>
+
+<div class="flex flex-col items-center justify-center text-center">
+    <h1 class="font-syne text-24 font-600 mb-16">Connect your wallet</h1>
+    <span class="mb-32">
+        Connect your wallet to keep using Exoda
+    </span>
+
+    <img src={wallet} alt="wallet" class="w-240 mb-32"/>
+
+    <Button on:click={ handleAuthentication } loading={ loading }>Connect wallet</Button>
+</div>
