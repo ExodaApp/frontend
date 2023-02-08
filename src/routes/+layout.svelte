@@ -35,7 +35,7 @@
         </div>
 
         <!-- Content -->
-        <div class="w-full h-full">
+        <div class="w-full h-full py-32">
             <slot/>
         </div>
     </div>
