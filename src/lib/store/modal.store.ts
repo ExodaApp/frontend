@@ -11,22 +11,21 @@ interface Modal {
 const defaultModal: Modal = {
     component: null,
     open: false,
-    dismissible: false,
+    dismissible: true,
     data: null,
 }
 
 export const modal: Writable<Modal> = writable(defaultModal)
 
-export function openModal(component: SvelteComponent) {
+export function openModal(component: SvelteComponent, dismissible?: boolean) {
     modal.update((modal => ({
         ...modal,
         component,
         open: true,
+        dismissible: dismissible || false
     })))
 }
 
 export function closeModal() {
-    console.log('Closing modal')
-
     modal.set(defaultModal)
 }

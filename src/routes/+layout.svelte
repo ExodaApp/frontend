@@ -3,21 +3,18 @@
     import '@fontsource/syne'
     import '@fontsource/plus-jakarta-sans'
 
-    import { onMount } from 'svelte'
-    import { walletProvider } from '$lib/store/wallet-provider.store'
-    import { user, setUserAddress } from '$lib/store/user.store'
+    import { user } from '$lib/store/user.store'
     import { modal, openModal, closeModal } from '$lib/store/modal.store'
-    import { WalletService } from '$lib/services/WalletService'
+
     import Menu from '$lib/components/Menu.svelte'
     import Modal from '$lib/components/Modal.svelte'
     import Authenticate from '$lib/components/Authenticate.svelte'
-    import "../app.css"
 
-    const walletService = new WalletService(walletProvider)
+    import "../app.css"
 
     $: {
         if (!$user.authenticated)
-            openModal(Authenticate)
+            openModal(Authenticate, false)
 
         if ($user.authenticated && $modal.open)
             closeModal()

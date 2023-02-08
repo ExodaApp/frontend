@@ -4,16 +4,19 @@
 </script>
 
 <div class="flex justify-center items-center absolute  
-    bg-dark-1 backdrop-blur
+    bg-dark-1 backdrop-blur text-white
     w-full h-full">
-    <div class="w-full h-full laptop:w-480 laptop:h-560
-        px-32 py-32
+    <div class="flex flex-col items-center justify-center
+        w-full h-full laptop:w-480 laptop:h-auto
+        px-32 py-56
         bg-dark-0 text-white rounded-xl">
-        <div class="flex w-full items-end justify-end">
-            <button on:click={ closeModal }>
-                <Close/>
-            </button>
-        </div>
+        { #if $modal.dismissible }
+            <div class="flex w-full items-end justify-end">
+                <button on:click={ closeModal }>
+                    <Close/>
+                </button>
+            </div>
+        { /if }
         <svelte:component this="{$modal.component}"/>
     </div>
 </div>
