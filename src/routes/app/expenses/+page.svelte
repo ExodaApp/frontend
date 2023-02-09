@@ -21,6 +21,15 @@
             'test'
         ],
     ]
+
+    // const tableHeaders = ['Exchange', 'Address', 'Test'] 
+    // const tableContent = [
+    //     [
+    //         'Binance',
+    //         '0xa543...0306B',
+    //         'Another test'
+    //     ],
+    // ]
 </script>
 
 <h2 class="font-syne text-24 mb-16 font-600">Summary</h2>
