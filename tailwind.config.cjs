@@ -23,6 +23,7 @@ module.exports = {
             primary: 'rgba(92, 26, 233, 0.5)',
             'primary-solid': 'rgba(92, 26, 233, 1)',
             white: '#CBCBCB',
+            'off-white': 'rgba(255, 255, 255, 0.60)',
             'dark-0': 'rgba(0, 0, 0, 0.8)',
             'dark-1': 'rgba(0, 0, 0, 0.4)',
             'dark-2': 'rgba(17, 17, 17, 0.75)',
