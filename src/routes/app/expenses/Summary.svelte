@@ -8,7 +8,7 @@
     export let assetsValue= 15000
 </script>
 
-<div class="grid grid-cols-3 gap-24 tablet:gap-32 font-syne font-600 text-20 tablet:text-32 tracking-4">
+<div class="grid grid-cols-3 gap-24 tablet:gap-32 font-syne font-600 text-20 tablet:text-32 tracking-4 bg-primary rounded-3xl tablet:bg-transparent tablet:rounded-none">
     <div class="flex flex-col items-center justify-center py-24 rounded-3xl bg-transparent tablet:bg-primary">
         <Book class="h-32 tablet:h-40"/>
         { expenses }

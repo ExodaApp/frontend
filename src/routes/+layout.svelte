@@ -13,11 +13,12 @@
     import "../app.css"
 
     $: {
-        if (!$user.authenticated)
-            openModal(Authenticate, false)
-
-        if ($user.authenticated && $modal.open)
-            closeModal()
+        // TODO: uncomment
+        // if (!$user.authenticated)
+        //     openModal(Authenticate, false)
+        //
+        // if ($user.authenticated && $modal.open)
+        //     closeModal()
     }
 </script>
 

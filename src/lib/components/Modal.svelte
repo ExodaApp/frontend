@@ -17,6 +17,6 @@
                 </button>
             </div>
         { /if }
-        <svelte:component this="{$modal.component}"/>
+        <svelte:component this="{ $modal.component }"/>
     </div>
 </div>
