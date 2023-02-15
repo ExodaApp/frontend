@@ -8,7 +8,9 @@
     export let assetsValue= 15000
 </script>
 
-<div class="grid grid-cols-3 gap-24 tablet:gap-32 font-syne font-600 text-20 tablet:text-32 tracking-4 bg-primary rounded-3xl tablet:bg-transparent tablet:rounded-none">
+<div class="hidden grid-cols-3 gap-24 tablet:gap-32 tablet:grid
+    font-syne font-600 text-20 tablet:text-32 tracking-4 
+    bg-primary rounded-3xl tablet:bg-transparent tablet:rounded-none">
     <div class="flex flex-col items-center justify-center py-24 rounded-3xl bg-transparent tablet:bg-primary">
         <Book class="h-32 tablet:h-40"/>
         { expenses }
@@ -36,4 +38,26 @@
     </div>
 </div>
 
+<div class="grid grid-cols-3 justify-center tablet:hidden
+    pt-24 pb-12 
+    font-syne font-500
+    bg-primary rounded-xl">
+    <div class="flex flex-col items-center">
+        <Book class="h-24"/>
+        <p class="text-20">{ expenses }</p>
+        <p>expenses</p>
+    </div>
+
+    <div class="flex flex-col items-center">
+        <Send class="h-24"/>
+        <p class="text-20">$ { expensesValue }</p>
+        <p>per month</p>
+    </div>
+
+    <div class="flex flex-col items-center">
+        <BarChart class="h-24"/> 
+        <p class="text-20">$ { assetsValue }</p>
+        <p>expenses</p>
+    </div>
+</div>
 

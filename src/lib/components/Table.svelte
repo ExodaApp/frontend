@@ -1,6 +1,7 @@
 <script lang="ts">
     import { createEventDispatcher } from 'svelte'
     import Trash from '$lib/icons/Trash.svelte'
+    import TrashWhite from '$lib/icons/TrashWhite.svelte'
     import Edit from '$lib/icons/Edit.svelte'
 
     export let headers: string[]
@@ -79,13 +80,25 @@
 
 <div class="flex flex-col gap-24 laptop:hidden">
     { #each rows as row, i }
-        <div class="[ table ] grid gap-32 py-24 px-32 bg-dark-3 rounded-xl font-syne font-600">
+        <div class="[ table ] grid gap-32 py-24 px-32 bg-dark-3 rounded-xl font-jakarta font-600">
             { #each row.content as value, j }
                 <div class:col-p-2={ j === 0 }>
                     <p class="block laptop:hidden text-12 text-off-white">{ headers[j] }</p>
                     <p>{ value }</p>
                 </div>
             { /each }
+            { #if editable }
+                <div class="grid grid-cols-2 w-full col-span-2 gap-24 font-syne">
+                    <div class="flex justify-center items-center rounded-md gap-4 bg-red py-4 cursor-pointer">
+                        <TrashWhite class="h-16"/>
+                        Delete
+                    </div>
+                    <div class="flex justify-center items-center rounded-md gap-4 bg-primary-solid py-4 cursor-pointer">
+                        <Edit class="h-16"/>
+                        Edit
+                    </div>
+                </div>
+            { /if }
         </div>
     { /each }
 </div>
