@@ -26,17 +26,17 @@
     <Modal/>
 {/if}
 
-<div class="w-full h-screen bg-[url('/app-bg.jpg')] bg-cover bg-center flex justify-center">
-    <div class="flex flex-col
-        w-full h-full px-8 gap-12 tablet:px-24 laptop:py-24 laptop:max-w-default laptop:gap-20 
-        text-white">
-        <!-- Head -->
-        <div class="">
+<div class="w-full h-screen bg-[url('/app-bg.jpg')] bg-repeat bg-cover bg-center flex flex-col text-white">
+    <!-- Header -->
+    <div class="w-full flex items-center justify-center px-16 tablet:px-32 pt-16">
+        <div class="flex items-center justify-center laptop:max-w-default w-full">
             <Menu/>
         </div>
+    </div>
 
-        <!-- Content -->
-        <div class="w-full h-full py-32">
+    <!-- Content -->
+    <div class="overflow-y-scroll h-full flex items-center justify-center px-16 tablet:px-32">
+        <div class="w-full py-32 h-full laptop:py-24 laptop:max-w-default">
             <slot/>
         </div>
     </div>
