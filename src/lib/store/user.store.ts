@@ -21,13 +21,6 @@ export const setUserAddress = (address: string) => {
         ...user,
         address,
         walletConnected: true,
-    }))
-}
-
-export const setJwt = (jwt: string) => {
-    user.update(user => ({
-        ...user,
-        jwt,
         authenticated: true,
     }))
 }

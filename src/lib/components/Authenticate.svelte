@@ -1,6 +1,7 @@
 <script lang="ts">
     import { walletProvider } from '$lib/store/wallet-provider.store'
-    import { user, setUserAddress, setJwt } from '$lib/store/user.store'
+    import { user, setUserAddress } from '$lib/store/user.store'
+    import { closeModal } from '$lib/store/modal.store'
     import wallet from '$lib/images/wallet.png'
 
     import { WalletService } from '$lib/services/WalletService'
@@ -15,16 +16,12 @@
         try {
             loading = true
 
-            const userAddress = await WalletService.connect() 
-            const nonce = await UserService.getNonce(userAddress)
+            const address = await AuthService.auth()
 
-            const signature = await WalletService.signMessage(`${ nonce }`)
-            const jwt = await AuthService.authenticate(userAddress, signature)
-
-            setJwt(jwt)
-            setUserAddress(userAddress)
+            closeModal()
+            setUserAddress(address)
         } catch (error) {
-
+            // TODO: call toast
         } finally {
             loading = false
         }

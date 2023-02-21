@@ -1,30 +1,41 @@
-import { z } from 'zod'
-import axios from 'axios'
 import { PUBLIC_EXODA_API } from '$env/static/public'
-
-const AuthenticateSchema = z.object({
-    jwt: z.string().min(1, { message: 'Invalid JWT token'})
-})
+import { SSX } from "@spruceid/ssx";
 
 /**
 * Interacts with Exoda's API to handle authentication process
 */
 export class AuthService {
-    private static readonly _baseUrl = `${PUBLIC_EXODA_API}/authenticate`
-
     /**
-    * Receives a signed message sends to back-end and if valid, receives back a JWT token
+    * Uses SSX to create a session between 
     *
-    * @param userAddress - address of the user who signed the message
-    * @param signature - a message signed using user's private key 
-    * @return JWT
+    * @return user address or throws
     */
-    public static async authenticate(userAddress: string, signature: string): Promise<string> {
-        const response = (await axios.post(AuthService._baseUrl, {
-            userAddress,
-            signature,
-        })).data
+    public static async auth(): Promise<string> {
+        const { address } = await AuthService._ssx.signIn()
 
-        return AuthenticateSchema.parse(response).jwt
+        if (!address)
+            throw new Error('AuthService::auth: address no present on response from the server')
+
+        return address
+    }
+
+    private static get _ssx(): SSX {
+        return new SSX({
+            enableDaoLogin: false,
+            resolveEns: true,
+            providers: {
+                web3: {
+                    driver: window.ethereum,
+                },
+                server: {
+                    host: PUBLIC_EXODA_API,
+                    routes: {
+                        nonce: '/nonce',
+                        login: '/login',
+                        logout: '/logout',
+                    }
+                },
+            },
+        })
     }
 }

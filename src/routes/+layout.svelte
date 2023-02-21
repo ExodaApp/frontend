@@ -13,12 +13,11 @@
     import "../app.css"
 
     $: {
-        // TODO: uncomment
-        // if (!$user.authenticated)
-        //     openModal(Authenticate, false)
-        //
-        // if ($user.authenticated && $modal.open)
-        //     closeModal()
+        if (!$user.authenticated)
+            openModal(Authenticate, false)
+
+        if ($user.authenticated && $modal.open)
+            closeModal()
     }
 </script>
 
@@ -26,7 +25,7 @@
     <Modal/>
 {/if}
 
-<div class="w-full h-screen bg-[url('/app-bg.jpg')] bg-repeat bg-cover bg-center flex flex-col text-white">
+<div class="w-full h-screen bg-[url('/app-bg.jpg')] bg-repeat bg-cover bg-center flex flex-col text-white font-jakarta">
     <!-- Header -->
     <div class="w-full flex items-center justify-center px-16 tablet:px-32 pt-16">
         <div class="flex items-center justify-center laptop:max-w-default w-full">
