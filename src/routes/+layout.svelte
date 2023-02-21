@@ -16,7 +16,7 @@
         if (!$user.authenticated)
             openModal(Authenticate, false)
 
-        if ($user.authenticated && $modal.open)
+        if ($user.authenticated)
             closeModal()
     }
 </script>

@@ -5,7 +5,6 @@
     import wallet from '$lib/images/wallet.png'
 
     import { WalletService } from '$lib/services/WalletService'
-    import { UserService } from '$lib/services/UserService'
     import { AuthService } from '$lib/services/AuthService'
 
     import Button from '$lib/components/Button.svelte'

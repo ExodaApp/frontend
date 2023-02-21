@@ -1,12 +1,17 @@
 <script lang="ts">
-    import Summary from './Summary.svelte'
+    import type { ActionData } from "@sveltejs/kit"
 
+    import Summary from './Summary.svelte'
     import Table from '$lib/components/Table.svelte'
     import Button from '$lib/components/Button.svelte'
+    import CreateExpenses from '$lib/components/CreateExpenses.svelte'
     import Book from '$lib/icons/Book.svelte'
+    import Add from '$lib/icons/Add.svelte'
 
     import banking from '$lib/images/banking.png'
     import yoga from '$lib/images/yoga-animated.gif'
+
+    import { openModal } from '$lib/store/modal.store'
 
     const tableHeaders = ['Expense', 'Due day', 'Value', 'Currency'] 
     const _tableContent: { id: number, content: string[] }[][] = [
@@ -30,26 +35,19 @@
         },
     ]
 
+    export let form: ActionData
     let hasExpenses = false
 
     const tableContent = []
 
     $: hasExpenses = !!tableContent.length
 
-    // const editCallback = (id: number) => console.log('GOT AN ID')
-
-    // const tableHeaders = ['Exchange', 'Address', 'Test'] 
-    // const tableContent = [
-    //     [
-    //         'Binance',
-    //         '0xa543...0306B',
-    //         'Another test'
-    //     ],
-    // ]
+    const openCreateExpenseModal = () => {
+        console.log('Opening modal')
+        openModal(CreateExpenses, true)
+    }
 </script>
 
-<!-- <div class=""> -->
-<!-- </div> -->
 { #if hasExpenses }
     <h2 class="font-syne text-24 mb-16 font-600">Summary</h2>
     <div class="mb-32">
@@ -57,11 +55,17 @@
     </div>
 { /if }
 
-<h2 class="font-syne text-24 mb-16 font-600">Expenses</h2>
+<div class="flex justify-between items-center px-4">
+    <h2 class="font-syne text-24 mb-16 font-600">Expenses</h2>
+    <button class="flex items-center gap-4" on:click={openCreateExpenseModal}>
+        <Add class="h-20"/>
+        Create
+    </button>
+</div>
 
 { #if hasExpenses }
-    <Table headers={ tableHeaders }
-        rows={ tableContent }
+    <Table headers={tableHeaders}
+        rows={tableContent}
         editable={true}
         on:edit={(param) => console.log('Edit emmited', param)}
         on:delete={() => console.log('Delete emmited')}/>
@@ -71,6 +75,6 @@
         bg-dark-2 rounded-3xl text-center">
         <h1 class="font-lexend font-600 text-24">No expenses yet</h1>
         <img src={yoga} class="w-240"/>
-        <span>Click on "Create expense" and start tracking your bills</span>
+        <p>Click on "Create" and start tracking your expenses</p>
     </div>
 { /if }
