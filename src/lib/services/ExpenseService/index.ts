@@ -6,6 +6,10 @@ export class ExpenseService {
     public static readonly baseUrl = `${ PUBLIC_EXODA_API }/expense`
 
     public static async createExpenses(expenses: IExpense[]) {
-        return (await axios.post(ExpenseService.baseUrl, { expenses })).data
+        return (await axios.post(
+            ExpenseService.baseUrl,
+            { expenses },
+            { withCredentials: true },
+        )).data
     }
 }
