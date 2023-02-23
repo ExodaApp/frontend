@@ -22,6 +22,7 @@
     let tableContent = []
     let hasExpenses = false
 
+    // TODO: make sure expenses are re-rendered after a new expese is created
     $: hasExpenses = !!tableContent.length
     $: {
         if ($user.authenticated)

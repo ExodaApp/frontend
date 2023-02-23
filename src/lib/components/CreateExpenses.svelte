@@ -39,6 +39,8 @@
 </script>
 
 <div class="w-full flex flex-col gap-24">
+    <h1 class="font-syne text-24 font-600 mb-16">Create expense</h1>
+
     <div>
         <label class="text-14">Expense name</label>
         <Input bind:value={expense.name} />

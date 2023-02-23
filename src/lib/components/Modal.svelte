@@ -8,8 +8,8 @@
     w-full h-full">
     <div class="flex flex-col items-center justify-center
         w-full h-full laptop:w-480 laptop:h-auto
-        px-32 py-56
-        bg-dark-0 text-white rounded-xl">
+        px-32 py-40
+        bg-dark-solid text-white rounded-xl">
         { #if $modal.dismissible }
             <div class="flex w-full items-end justify-end">
                 <button on:click={ closeModal }>
