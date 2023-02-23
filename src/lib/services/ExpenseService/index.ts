@@ -6,8 +6,6 @@ export class ExpenseService {
     public static readonly baseUrl = `${ PUBLIC_EXODA_API }/expense`
 
     public static async createExpenses(expenses: IExpense[]) {
-        console.log({ expenses })
-
         await axios.post(
             ExpenseService.baseUrl,
             { expenses },
@@ -15,10 +13,17 @@ export class ExpenseService {
         )
     }
 
-    public static async getExpenses(userAddress: string): Promise<IExpense[]> {
+    public static async getExpenses(): Promise<IExpense[]> {
         return (await axios.get(
-            `${ ExpenseService.baseUrl }`,
+            ExpenseService.baseUrl,
             { withCredentials: true }
         )).data
+    }
+
+    public static async deleteExpense(id: number) {
+        await axios.delete(
+            `${ ExpenseService.baseUrl }/${ id }`,
+            { withCredentials: true },
+        )
     }
 }

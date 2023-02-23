@@ -5,6 +5,7 @@
     import Table from '$lib/components/Table.svelte'
     import Button from '$lib/components/Button.svelte'
     import CreateExpenses from '$lib/components/CreateExpenses.svelte'
+    import DeleteExpense from '$lib/components/DeleteExpense.svelte'
     import Book from '$lib/icons/Book.svelte'
     import Add from '$lib/icons/Add.svelte'
 
@@ -22,7 +23,7 @@
     let tableContent = []
     let hasExpenses = false
 
-    // TODO: make sure expenses are re-rendered after a new expese is created
+    $: tableContent = expensesToTableContent($expenses)
     $: hasExpenses = !!tableContent.length
     $: {
         if ($user.authenticated)
@@ -30,9 +31,7 @@
     }
 
     const fetchExpenses = async () => {
-        tableContent = expensesToTableContent(
-            $expenses || await ExpenseService.getExpenses($user.address)
-        )
+        setExpenses(await ExpenseService.getExpenses($user.address))
     }
 
     const expensesToTableContent = (expenses: IExpense[]) => expenses.map(expense => ({
@@ -45,9 +44,14 @@
         ]
     }))
 
-    const openCreateExpenseModal = () => {
-        openModal(CreateExpenses, true)
-    }
+    const openCreateExpenseModal = () =>
+        openModal({ component: CreateExpenses, dismissible: true })
+
+    const openDeleteModal = (event) =>
+        openModal({ component: DeleteExpense, data: event.detail, dismissible: true })
+
+    const openEditModal = (event) =>
+        openModal({ component: DeleteExpense, data: event.detail  })
 </script>
 
 { #if hasExpenses }
@@ -69,8 +73,8 @@
     <Table headers={tableHeaders}
         rows={tableContent}
         editable={true}
-        on:edit={(param) => console.log('Edit emmited', param)}
-        on:delete={() => console.log('Delete emmited')}/>
+        on:edit={openEditModal}
+        on:delete={openDeleteModal}/>
 { :else }
     <div class="flex flex-col items-center justify-center 
         gap-24 w-full h-max p-24

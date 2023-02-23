@@ -14,7 +14,7 @@
 
     $: {
         if (!$user.authenticated)
-            openModal(Authenticate, false)
+            openModal({ component: Authenticate, dismissible: false })
 
         if ($user.authenticated)
             closeModal()

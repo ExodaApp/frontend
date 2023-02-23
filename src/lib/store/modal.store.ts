@@ -17,12 +17,21 @@ const defaultModal: Modal = {
 
 export const modal: Writable<Modal> = writable(defaultModal)
 
-export function openModal(component: SvelteComponent, dismissible?: boolean) {
+export function openModal({
+    component,
+    dismissible,
+    data,
+}: {
+    component: SvelteComponent,
+    dismissible?: boolean,
+    data: any
+}) {
     modal.update((modal => ({
         ...modal,
         component,
         open: true,
-        dismissible: dismissible || false
+        dismissible: dismissible || false,
+        data,
     })))
 }
 

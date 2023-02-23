@@ -6,6 +6,7 @@
 
     import { setExpenses } from '$lib/store/expenses.store'
     import { user } from '$lib/store/user.store'
+    import { closeModal } from '$lib/store/modal.store'
 
     let loading: boolean
     let expense: IExpense = {
@@ -28,6 +29,7 @@
             console.log(error)
         } finally {
             loading = false
+            closeModal()
         }
     }
 
