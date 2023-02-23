@@ -14,6 +14,7 @@
     import { openModal } from '$lib/store/modal.store'
 
     const tableHeaders = ['Expense', 'Due day', 'Value', 'Currency'] 
+    const tableContent = []
     const _tableContent: { id: number, content: string[] }[][] = [
         {
             id: 0,       
@@ -38,7 +39,6 @@
     export let form: ActionData
     let hasExpenses = false
 
-    const tableContent = []
 
     $: hasExpenses = !!tableContent.length
 

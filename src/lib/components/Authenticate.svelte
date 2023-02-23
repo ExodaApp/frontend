@@ -6,6 +6,7 @@
 
     import { WalletService } from '$lib/services/WalletService'
     import { AuthService } from '$lib/services/AuthService'
+    import { UserService } from '$lib/services/UserService'
 
     import Button from '$lib/components/Button.svelte'
 
@@ -16,6 +17,12 @@
             loading = true
 
             const address = await AuthService.auth()
+            const user = await UserService.getUser(address)
+
+            console.log({ user })
+
+            if (!user)
+                await UserService.createUser(address)
 
             closeModal()
             setUserAddress(address)
