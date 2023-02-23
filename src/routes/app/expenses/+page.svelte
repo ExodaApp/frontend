@@ -51,7 +51,7 @@
         openModal({ component: DeleteExpense, data: event.detail, dismissible: true })
 
     const openEditModal = (event) =>
-        openModal({ component: DeleteExpense, data: event.detail  })
+        openModal({ component: CreateExpenses, data: event.detail, dismissible: true })
 </script>
 
 { #if hasExpenses }

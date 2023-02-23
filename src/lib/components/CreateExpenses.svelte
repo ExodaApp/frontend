@@ -4,10 +4,11 @@
     import Button from '$lib/components/Button.svelte'
     import Input from '$lib/components/Input.svelte'
 
-    import { setExpenses } from '$lib/store/expenses.store'
+    import { expenses, setExpenses } from '$lib/store/expenses.store'
     import { user } from '$lib/store/user.store'
     import { closeModal } from '$lib/store/modal.store'
 
+    export let data: any
     let loading: boolean
     let expense: IExpense = {
         name: '',
@@ -16,22 +17,37 @@
         currency: '',
     }
 
-    const handleCreate = async () => {
+    $: {
+        if (data) {
+            expense = $expenses.find(expense => expense.id === data)
+        }
+            
+    }
+
+    const handleSubmit = async () => {
         try {
             loading = true
 
-            await ExpenseService.createExpenses([
-                parseExpense()
-            ])
+            const handler = data ? handleEdit : handleCreate
+            
+            await handler()
 
             setExpenses(await ExpenseService.getExpenses($user.address))
+
+            // TODO: add toast
         } catch (error) {
-            console.log(error)
+            // TODO: add toast 
         } finally {
             loading = false
             closeModal()
         }
     }
+
+    const handleEdit = () =>
+        ExpenseService.editExpense(parseExpense())
+
+    const handleCreate = () =>
+        ExpenseService.createExpenses([ parseExpense() ])
 
     const parseExpense = (): IExpense =>  ({
         ...expense,
@@ -64,8 +80,8 @@
     </div>
 
     <div class="flex justify-end">
-        <Button loading={loading} on:click={handleCreate}>
-            Create
+        <Button loading={loading} on:click={handleSubmit}>
+            { data ? 'Edit' : 'Create' }
         </Button>
     </div>
 </div>

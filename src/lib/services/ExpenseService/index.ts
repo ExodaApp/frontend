@@ -26,4 +26,15 @@ export class ExpenseService {
             { withCredentials: true },
         )
     }
+
+    public static async editExpense(expense: IExpense) {
+        if (!expense.id)
+            throw new Error('Expense doesnt exist')
+
+        await axios.put(
+            `${ ExpenseService.baseUrl }/${ expense.id }`,
+            expense,
+            { withCredentials: true },
+        )
+    }
 }

@@ -89,11 +89,13 @@
             { /each }
             { #if editable }
                 <div class="grid grid-cols-2 w-full col-span-2 gap-24 font-syne">
-                    <div class="flex justify-center items-center rounded-md gap-4 bg-red py-4 cursor-pointer">
+                    <div class="flex justify-center items-center rounded-md gap-4 bg-red py-4 cursor-pointer"
+                        on:click={() => emitDelete(row.id)}>
                         <TrashWhite class="h-16"/>
                         Delete
                     </div>
-                    <div class="flex justify-center items-center rounded-md gap-4 bg-primary-solid py-4 cursor-pointer">
+                    <div class="flex justify-center items-center rounded-md gap-4 bg-primary-solid py-4 cursor-pointer"
+                        on:click={() => emitEdit(row.id)}>
                         <Edit class="h-16"/>
                         Edit
                     </div>
