@@ -4,6 +4,8 @@ export enum Currency {
 }
 
 export interface IExpense {
+    id?: number
+    userAddress?: string
     name: string
     dueDay: number
     value: number

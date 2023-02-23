@@ -8,10 +8,17 @@ export class ExpenseService {
     public static async createExpenses(expenses: IExpense[]) {
         console.log({ expenses })
 
-        return (await axios.post(
+        await axios.post(
             ExpenseService.baseUrl,
             { expenses },
             { withCredentials: true },
+        )
+    }
+
+    public static async getExpenses(userAddress: string): Promise<IExpense[]> {
+        return (await axios.get(
+            `${ ExpenseService.baseUrl }`,
+            { withCredentials: true }
         )).data
     }
 }

@@ -4,6 +4,9 @@
     import Button from '$lib/components/Button.svelte'
     import Input from '$lib/components/Input.svelte'
 
+    import { setExpenses } from '$lib/store/expenses.store'
+    import { user } from '$lib/store/user.store'
+
     let loading: boolean
     let expense: IExpense = {
         name: '',
@@ -16,11 +19,11 @@
         try {
             loading = true
 
-            const response = await ExpenseService.createExpenses([
+            await ExpenseService.createExpenses([
                 parseExpense()
             ])
 
-            console.log(respnse)
+            setExpenses(await ExpenseService.getExpenses($user.address))
         } catch (error) {
             console.log(error)
         } finally {

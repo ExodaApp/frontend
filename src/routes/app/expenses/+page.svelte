@@ -8,42 +8,43 @@
     import Book from '$lib/icons/Book.svelte'
     import Add from '$lib/icons/Add.svelte'
 
+    import { ExpenseService } from '$lib/services/ExpenseService'
+    import type { IExpense } from '$lib/interfaces/IExpense'
+ 
     import banking from '$lib/images/banking.png'
     import yoga from '$lib/images/yoga-animated.gif'
 
     import { openModal } from '$lib/store/modal.store'
+    import { user } from '$lib/store/user.store'
+    import { expenses, setExpenses } from '$lib/store/expenses.store'
 
-    const tableHeaders = ['Expense', 'Due day', 'Value', 'Currency'] 
-    const tableContent = []
-    const _tableContent: { id: number, content: string[] }[][] = [
-        {
-            id: 0,       
-            content: [
-                'Credit card',
-                '20',
-                '$ 1500',
-                'BRL',
-            ],
-        },
-        {
-            id: 1,       
-            content: [
-                'Credit card',
-                '20',
-                '$ 1500',
-                'BRL',
-            ],
-        },
-    ]
-
-    export let form: ActionData
+    const tableHeaders = ['Expense', 'Due day', 'Currency', 'Value'] 
+    let tableContent = []
     let hasExpenses = false
 
-
     $: hasExpenses = !!tableContent.length
+    $: {
+        if ($user.authenticated)
+            fetchExpenses()
+    }
+
+    const fetchExpenses = async () => {
+        tableContent = expensesToTableContent(
+            $expenses || await ExpenseService.getExpenses($user.address)
+        )
+    }
+
+    const expensesToTableContent = (expenses: IExpense[]) => expenses.map(expense => ({
+        id: expense.id,
+        content: [
+            expense.name,
+            expense.dueDay,
+            expense.currency,
+            expense.value,
+        ]
+    }))
 
     const openCreateExpenseModal = () => {
-        console.log('Opening modal')
         openModal(CreateExpenses, true)
     }
 </script>
