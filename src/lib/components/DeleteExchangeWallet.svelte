@@ -2,10 +2,10 @@
     import TrashWhite from '$lib/icons/TrashWhite.svelte'
     import Warning from '$lib/images/warning.png'
     import Button from '$lib/components/Button.svelte'
-    import { ExpenseService } from '$lib/services/ExpenseService'
+    import { ExchangeWalletService } from '$lib/services/ExchangeWalletService'
 
     import { user } from '$lib/store/user.store'
-    import { setExpenses } from '$lib/store/expenses.store'
+    import { setExchangeWallets } from '$lib/store/exchange-wallets.store'
     import { closeModal } from '$lib/store/modal.store'
 
     export let data: any
@@ -15,9 +15,9 @@
         try {
             loading = true
 
-            await ExpenseService.deleteExpense(data)
+            await ExchangeWalletService.deleteExchangeWallet(data)
 
-            setExpenses(await ExpenseService.getExpenses())
+            setExchangeWallets(await ExchangeWalletService.getExchangeWallets())
             // TODO: call toast
         } catch (error) {
             // TODO: call toast
@@ -29,7 +29,7 @@
 </script>
 
 <div class="flex flex-col items-center justify-center text-center gap-32">
-    <h1 class="font-syne text-24 font-600 mb-16">Are you sure you want to delete expense?</h1>
+    <h1 class="font-syne text-24 font-600 mb-16">Are you sure you want to delete this exchange wallet?</h1>
 
     <img src={ Warning } class="w-280"/>
 

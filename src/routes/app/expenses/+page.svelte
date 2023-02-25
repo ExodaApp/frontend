@@ -4,8 +4,10 @@
     import Summary from './Summary.svelte'
     import Table from '$lib/components/Table.svelte'
     import Button from '$lib/components/Button.svelte'
-    import CreateExpenses from '$lib/components/CreateExpenses.svelte'
     import DeleteExpense from '$lib/components/DeleteExpense.svelte'
+    import CreateExpenses from '$lib/components/CreateExpenses.svelte'
+    import TableEmptyState from '$lib/components/TableEmptyState.svelte'
+
     import Book from '$lib/icons/Book.svelte'
     import Add from '$lib/icons/Add.svelte'
 
@@ -13,7 +15,6 @@
     import type { IExpense } from '$lib/interfaces/IExpense'
  
     import banking from '$lib/images/banking.png'
-    import yoga from '$lib/images/yoga-animated.gif'
 
     import { openModal } from '$lib/store/modal.store'
     import { user } from '$lib/store/user.store'
@@ -30,9 +31,8 @@
             fetchExpenses()
     }
 
-    const fetchExpenses = async () => {
-        setExpenses(await ExpenseService.getExpenses($user.address))
-    }
+    const fetchExpenses = async () =>
+        setExpenses(await ExpenseService.getExpenses())
 
     const expensesToTableContent = (expenses: IExpense[]) => expenses.map(expense => ({
         id: expense.id,
@@ -76,11 +76,6 @@
         on:edit={openEditModal}
         on:delete={openDeleteModal}/>
 { :else }
-    <div class="flex flex-col items-center justify-center 
-        gap-24 w-full h-max p-24
-        bg-dark-2 rounded-3xl text-center">
-        <h1 class="font-lexend font-600 text-24">No expenses yet</h1>
-        <img src={yoga} class="w-240"/>
-        <p>Click on "Create" and start tracking your expenses</p>
-    </div>
+    <TableEmptyState header="No expenses yet"
+        message="Click on &quot;Create&quot; and start tracking your expenses"/>
 { /if }

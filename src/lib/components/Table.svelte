@@ -84,7 +84,7 @@
             { #each row.content as value, j }
                 <div class:col-p-2={ j === 0 }>
                     <p class="block laptop:hidden text-12 text-off-white">{ headers[j] }</p>
-                    <p>{ value }</p>
+                    <p class="text-ellipsis overflow-hidden whitespace-nowrap">{ value }</p>
                 </div>
             { /each }
             { #if editable }
