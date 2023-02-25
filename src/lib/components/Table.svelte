@@ -30,9 +30,9 @@
 <div style="{cssVarStyles}" class="hidden laptop:block">
     <div class="[ table ] mb-12 grid gap-y-10">
         { #each headers as header, i }
-            <div class="px-32 py-24
+            <div class="px-32 pt-16
                 font-syne font-600
-                text-off-white bg-dark-2"
+                text-off-white "
                 class:rounded-l-xl={ i === 0 }
                 class:rounded-r-xl={ !editable && i === headers.length - 1 }>
                 { header }
@@ -40,9 +40,9 @@
         { /each }
 
         { #if editable }
-            <div class="px-32 py-24
+            <div class="px-32 pt-16 
                 font-syne font-600
-                text-off-white bg-dark-2 rounded-r-xl">
+                text-off-white rounded-r-xl">
             </div>
         { /if }
 
