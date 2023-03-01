@@ -7,6 +7,7 @@
     import DeleteExpense from '$lib/components/DeleteExpense.svelte'
     import CreateExpenses from '$lib/components/CreateExpenses.svelte'
     import TableEmptyState from '$lib/components/TableEmptyState.svelte'
+    import TransferToExchange from '$lib/components/TransferToExchange.svelte'
 
     import Book from '$lib/icons/Book.svelte'
     import Add from '$lib/icons/Add.svelte'
@@ -50,6 +51,9 @@
 
     const openEditModal = (event) =>
         openModal({ component: CreateExpenses, data: event.detail, dismissible: true })
+
+    const openTransferModal = () =>
+        openModal({ component: TransferToExchange, dismissible: true })
 </script>
 
 { #if $expenses.items.length }
@@ -73,6 +77,9 @@
         editable={true}
         on:edit={openEditModal}
         on:delete={openDeleteModal}/>
+    <div class="flex justify-end mt-20">
+        <Button on:click={openTransferModal}>Transfer to exchange</Button>
+    </div>
 { :else }
     <TableEmptyState header="No expenses yet"
         message="Click on &quot;Create&quot; and start tracking your expenses"/>

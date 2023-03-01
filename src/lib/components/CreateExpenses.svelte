@@ -18,10 +18,8 @@
     }
 
     $: {
-        if (data) {
+        if (data)
             expense = $expenses.items.find(expense => expense.id === data)
-        }
-            
     }
 
     const handleSubmit = async () => {
