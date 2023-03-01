@@ -19,7 +19,7 @@
 
     $: {
         if (data) {
-            expense = $expenses.find(expense => expense.id === data)
+            expense = $expenses.items.find(expense => expense.id === data)
         }
             
     }

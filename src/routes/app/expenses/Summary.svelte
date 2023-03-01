@@ -5,7 +5,7 @@
     import { expenses } from '$lib/store/expenses.store'
 
     // export let expenses = 5
-    // export let expensesValue = 5000
+    export let expensesValue = 5000
     export let assetsValue= 15000
 </script>
 
@@ -45,13 +45,13 @@
     bg-primary rounded-xl">
     <div class="flex flex-col items-center">
         <Book class="h-24"/>
-        <p class="text-20">{ expenses }</p>
+        <p class="text-20">{ $expenses.items.length }</p>
         <p>expenses</p>
     </div>
 
     <div class="flex flex-col items-center">
         <Send class="h-24"/>
-        <p class="text-20">$ { expensesValue }</p>
+        <p class="text-20">$ { $expenses.totalUsdValue }</p>
         <p>per month</p>
     </div>
 

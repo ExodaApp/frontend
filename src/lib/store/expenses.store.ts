@@ -18,9 +18,4 @@ export const setExpenses = ({
 }: {
     items: IExpense[],
     totalUsdValue: BigNumber
-}) => {
-    expenses.set({
-        items,
-        totalUsdValue,
-    })
-}
+}) => expenses.set({ items, totalUsdValue })
