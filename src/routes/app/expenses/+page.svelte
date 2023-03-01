@@ -24,7 +24,9 @@
     let tableContent = []
     let hasExpenses = false
 
-    $: tableContent = expensesToTableContent($expenses)
+    console.log({ expenses: $expenses.items })
+
+    $: tableContent = expensesToTableContent($expenses.items)
     $: hasExpenses = !!tableContent.length
     $: {
         if ($user.authenticated)

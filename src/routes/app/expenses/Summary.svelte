@@ -2,9 +2,10 @@
     import Book from '$lib/icons/Book.svelte'
     import Send from '$lib/icons/Send.svelte'
     import BarChart from '$lib/icons/BarChart.svelte'
+    import { expenses } from '$lib/store/expenses.store'
 
-    export let expenses = 5
-    export let expensesValue = 5000
+    // export let expenses = 5
+    // export let expensesValue = 5000
     export let assetsValue= 15000
 </script>
 
@@ -13,7 +14,7 @@
     bg-primary rounded-3xl tablet:bg-transparent tablet:rounded-none">
     <div class="flex flex-col items-center justify-center py-24 rounded-3xl bg-transparent tablet:bg-primary">
         <Book class="h-32 tablet:h-40"/>
-        { expenses }
+        { $expenses.items.length }
         <span class="text-16 tablet:text-24 font-600 tablet:font-400">
             expenses
         </span>
@@ -23,7 +24,7 @@
         py-32
         rounded-3xl bg-transparent tablet:bg-primary shadow-2xl tablet:shadow-[0px_3.35px_32px_rgba(99,31,211,0.9)] tablet:border border-primary">
         <Send class="h-32 tablet:h-40"/>
-        $ { expensesValue }
+        $ { $expenses.totalUsdValue }
         <span class="text-16 tablet:text-24 font-600 tablet:font-400">
             per month
         </span>
