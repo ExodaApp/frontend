@@ -19,8 +19,6 @@
             const address = await AuthService.auth()
             const user = await UserService.getUser(address)
 
-            console.log({ user })
-
             if (!user)
                 await UserService.createUser(address)
 

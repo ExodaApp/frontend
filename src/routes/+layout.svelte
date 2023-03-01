@@ -16,8 +16,9 @@
         if (!$user.authenticated)
             openModal({ component: Authenticate, dismissible: false })
 
-        if ($user.authenticated)
+        if ($user.authenticated) {
             closeModal()
+        }
     }
 </script>
 

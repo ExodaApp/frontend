@@ -22,10 +22,8 @@
 
     const tableHeaders = ['Expense', 'Due day', 'Currency', 'Value'] 
     let tableContent = []
-    let hasExpenses = false
 
-    $: tableContent = expensesToTableContent($expenses)
-    $: hasExpenses = !!tableContent.length
+    $: tableContent = expensesToTableContent($expenses.items)
     $: {
         if ($user.authenticated)
             fetchExpenses()
@@ -54,7 +52,7 @@
         openModal({ component: CreateExpenses, data: event.detail, dismissible: true })
 </script>
 
-{ #if hasExpenses }
+{ #if $expenses.items.length }
     <h2 class="font-syne text-24 mb-16 font-600">Summary</h2>
     <div class="mb-32">
         <Summary class="mb-32"/>
@@ -69,7 +67,7 @@
     </button>
 </div>
 
-{ #if hasExpenses }
+{ #if $expenses.items.length }
     <Table headers={tableHeaders}
         rows={tableContent}
         editable={true}
