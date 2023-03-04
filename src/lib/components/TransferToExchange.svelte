@@ -5,12 +5,13 @@
     import Select from '$lib/components/Select.svelte'
     import Button from '$lib/components/Button.svelte'
 
-    let exchangeOptions = []
+    let exchangeOptions
     let exchange
 
     $: exchangeOptions = $exchangeWallets.map(wallet => ({ id: wallet.id, value: wallet.name }))
     $: {
-        if (!exchange)
+        // TODO: once the problem is solved remove &&
+        if (!exchange && exchangeOptions.length)
             exchange = exchangeOptions[0].id
     }
 

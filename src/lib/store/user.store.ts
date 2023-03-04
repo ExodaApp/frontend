@@ -17,6 +17,8 @@ const defaultUser: IUserInfo = {
 export const user = writable<IUserInfo>(defaultUser)
 
 export const setUserAddress = (address: string) => {
+    console.log('setting user address', address)
+
     user.update(user => ({
         ...user,
         address,

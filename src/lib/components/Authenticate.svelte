@@ -1,16 +1,26 @@
 <script lang="ts">
     import { walletProvider } from '$lib/store/wallet-provider.store'
-    import { user, setUserAddress } from '$lib/store/user.store'
-    import { closeModal } from '$lib/store/modal.store'
     import wallet from '$lib/images/wallet.png'
+
+    import { closeModal } from '$lib/store/modal.store'
+    import { user, setUserAddress } from '$lib/store/user.store'
+    import { setExpenses } from '$lib/store/expenses.store'
+    import { setExchangeWallets } from '$lib/store/exchange-wallets.store'
 
     import { WalletService } from '$lib/services/WalletService'
     import { AuthService } from '$lib/services/AuthService'
     import { UserService } from '$lib/services/UserService'
+    import { ExpenseService } from '$lib/services/ExpenseService'
+    import { ExchangeWalletService } from '$lib/services/ExchangeWalletService'
 
     import Button from '$lib/components/Button.svelte'
 
     let loading = false
+
+    user.subscribe(user => {
+        if (user.authenticated)
+            fetchUserData()
+    })
 
     const handleAuthentication = async () => {
         try {
@@ -30,6 +40,19 @@
             loading = false
         }
     }
+
+    const fetchUserData = async () => {
+        await Promise.all([
+            fetchExpenses(),
+            fetchExchangeWallets(),
+        ])
+    }
+
+    const fetchExpenses = async () =>
+        setExpenses(await ExpenseService.getExpenses())
+
+    const fetchExchangeWallets = async () =>
+        setExchangeWallets(await ExchangeWalletService.getExchangeWallets())
 </script>
 
 

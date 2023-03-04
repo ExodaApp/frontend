@@ -6,7 +6,7 @@
     import type { IExchangeWallet } from '$lib/interfaces/IExchangeWallet'
     import { user } from '$lib/store/user.store'
     import { openModal } from '$lib/store/modal.store'
-    import { exchangeWallets, setExchangeWallets } from '$lib/store/exchange-wallets.store'
+    import { exchangeWallets } from '$lib/store/exchange-wallets.store'
     import { ExchangeWalletService } from '$lib/services/ExchangeWalletService'
 
     import Add from '$lib/icons/Add.svelte'
@@ -17,13 +17,6 @@
 
     $: hasExchangeWallets = !!tableContent.length
     $: tableContent = exchangeWalletsToTableContent($exchangeWallets)
-    $: {
-        if ($user.authenticated)
-            fetchExchangeWallets()
-    }
-
-    const fetchExchangeWallets = async () =>
-        setExchangeWallets(await ExchangeWalletService.getExchangeWallets())
 
     const exchangeWalletsToTableContent = (exchangeWallets: IExchangeWallet[]) => exchangeWallets.map(wallet => ({
         id: wallet.id,

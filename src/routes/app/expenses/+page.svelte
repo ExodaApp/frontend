@@ -19,19 +19,12 @@
 
     import { openModal } from '$lib/store/modal.store'
     import { user } from '$lib/store/user.store'
-    import { expenses, setExpenses } from '$lib/store/expenses.store'
+    import { expenses } from '$lib/store/expenses.store'
 
     const tableHeaders = ['Expense', 'Due day', 'Currency', 'Value'] 
     let tableContent = []
 
     $: tableContent = expensesToTableContent($expenses.items)
-    $: {
-        if ($user.authenticated)
-            fetchExpenses()
-    }
-
-    const fetchExpenses = async () =>
-        setExpenses(await ExpenseService.getExpenses())
 
     const expensesToTableContent = (expenses: IExpense[]) => expenses.map(expense => ({
         id: expense.id,
