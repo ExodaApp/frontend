@@ -1,7 +1,19 @@
 <script lang="ts">
     import { expenses } from '$lib/store/expenses.store'
+    import { exchangeWallets } from '$lib/store/exchange-wallets.store'
     import Input from '$lib/components/Input.svelte'
+    import Select from '$lib/components/Select.svelte'
     import Button from '$lib/components/Button.svelte'
+
+    let exchangeOptions = []
+    let exchange
+
+    $: exchangeOptions = $exchangeWallets.map(wallet => ({ id: wallet.id, value: wallet.name }))
+    $: {
+        if (!exchange)
+            exchange = exchangeOptions[0].id
+    }
+
 </script>
 
 <div class="flex gap-40 px-32 flex-col items-center justify-center w-full">
@@ -14,7 +26,7 @@
 
     <div class="flex flex-col text-center w-full gap-10">
         <p class="font-jakarta text-18 font-600">To exchange</p>
-        <Input />
+        <Select options={exchangeOptions} bind:value={exchange}/>
     </div>
 
     <div class="flex flex-col text-center w-full gap-10">

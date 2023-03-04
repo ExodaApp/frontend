@@ -2,6 +2,13 @@
   import { onMount, createEventDispatcher } from "svelte";
   import "tailwindcss/tailwind.css";
 
+  export let emptyState = 'Select'
+  export let options: { id: string, value: string }[]
+  export let value = ''
+  let selected: { id: string, value: string }
+
+  $: selected = options.find(option => option.id === value)
+
   const dispatch = createEventDispatcher();
   let isOpen = false;
 
@@ -14,20 +21,20 @@
     isOpen = false;
   }
 
-  // onMount(() => {
-  //   document.addEventListener("click", closeDropdown);
-  //   return () => {
-  //     document.removeEventListener("click", closeDropdown);
-  //   };
-  // });
+  onMount(() => {
+    document.addEventListener("click", closeDropdown);
+    return () => {
+      document.removeEventListener("click", closeDropdown);
+    };
+  });
 
   const handleClick = (option: string) => {
-    dispatch("optionSelected", option);
-    isOpen = false;
+    value = option
+    isOpen = false
   };
 </script>
 
-<div class="relative inline-block text-left w-full">
+<div class="dropdown relative inline-block text-left w-full">
   <div>
     <button
       type="button"
@@ -40,28 +47,33 @@
       aria-expanded={isOpen}
       on:click={toggleDropdown}
     >
-      Dropdown
+        { #if selected }
+            { selected.value }
+        { :else }
+            { emptyState }
+        { /if }
     </button>
   </div>
 
   {#if isOpen}
     <div
       class="absolute right-0 mt-2 w-full rounded-md
-        bg-dark-1 ring-1 ring-black ring-opacity-5 focus:outline-none z-10 dropdown"
+        bg-dark-3 focus:outline-none z-10 dropdown"
       role="menu"
       aria-orientation="vertical"
       aria-labelledby="options-menu"
     >
       <div class="py-1" role="none">
-        <a
-          href="#"
-          class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 hover:text-gray-900"
-          role="menuitem"
-          tabindex="-1"
-          on:click={() => handleClick("Option 1")}
-        >
-          Option 1
-        </a>
+        { #each options as option, i }
+            <div
+              class="block px-16 py-8 text-sm text-gray-700 hover:bg-dark-1 hover:text-gray-900 cursor-pointer"
+              role="menuitem"
+              tabindex="-1"
+              on:click={() => handleClick(option.id)}
+            >
+                { option.value }
+            </div>
+        { /each }
       </div>
     </div>
   {/if}
