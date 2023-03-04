@@ -12,7 +12,6 @@
     import Book from '$lib/icons/Book.svelte'
     import Add from '$lib/icons/Add.svelte'
 
-    import { ExpenseService } from '$lib/services/ExpenseService'
     import type { IExpense } from '$lib/interfaces/IExpense'
  
     import banking from '$lib/images/banking.png'

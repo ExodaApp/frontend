@@ -4,15 +4,27 @@
     import Input from '$lib/components/Input.svelte'
     import Select from '$lib/components/Select.svelte'
     import Button from '$lib/components/Button.svelte'
+    import { Token } from '$lib/models/Token'
 
     let exchangeOptions
     let exchange
+    let tokenAddress
+    let token: Token
 
     $: exchangeOptions = $exchangeWallets.map(wallet => ({ id: wallet.id, value: wallet.name }))
     $: {
-        // TODO: once the problem is solved remove &&
-        if (!exchange && exchangeOptions.length)
+        if (!exchange)
             exchange = exchangeOptions[0].id
+    }
+    $: {
+        // TODO: change this to actually verify address
+        if (tokenAddress.length === 42) {
+            // fetch token info
+        }
+    }
+
+    const getToken = async () => {
+        
     }
 
 </script>
@@ -32,7 +44,7 @@
 
     <div class="flex flex-col text-center w-full gap-10">
         <p class="font-jakarta text-18 font-600">Using token</p>
-        <Input />
+        <Input bind:value={tokenAddress}/>
     </div>
 
     <div class="w-full">
