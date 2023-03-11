@@ -8,23 +8,26 @@
 
     import Menu from '$lib/components/Menu.svelte'
     import Modal from '$lib/components/Modal.svelte'
-    import Authenticate from '$lib/components/Authenticate.svelte'
-
+    import LandingPage from '$lib/components/LandingPage.svelte'
     import "../app.css"
-
-    $: {
-        if (!$user.authenticated)
-            openModal({ component: Authenticate, dismissible: false })
-
-        if ($user.authenticated) {
-            closeModal()
-        }
-    }
 </script>
 
 { #if $modal.open }
     <Modal/>
 {/if}
+
+{ #if !$user.authenticated }
+    <div class="flex justify-center items-center absolute  
+        bg-dark-1 backdrop-blur text-white laptop:pt-88
+        w-full h-full">
+        <div class="flex flex-col items-center
+            w-full h-full laptop:max-w-app
+            px-32 py-40
+            bg-dark-solid text-white rounded-xl">
+            <LandingPage/>
+        </div>
+    </div>
+{ /if }
 
 <div class="w-full h-screen bg-[url('/app-bg.jpg')] bg-repeat bg-cover bg-center flex flex-col text-white font-jakarta">
     <!-- Header -->
