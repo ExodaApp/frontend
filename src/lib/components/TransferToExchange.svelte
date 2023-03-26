@@ -1,10 +1,10 @@
 <script lang="ts">
+    import { Token } from '@exoda-app/tokens'
     import { expenses } from '$lib/store/expenses.store'
     import { exchangeWallets } from '$lib/store/exchange-wallets.store'
     import Input from '$lib/components/Input.svelte'
     import Select from '$lib/components/Select.svelte'
     import Button from '$lib/components/Button.svelte'
-    import { Token } from '$lib/models/Token'
 
     let exchangeOptions
     let exchange
@@ -18,7 +18,7 @@
     }
     $: {
         // TODO: change this to actually verify address
-        if (tokenAddress.length === 42) {
+        if (tokenAddress && tokenAddress.length === 42) {
             // fetch token info
         }
     }
