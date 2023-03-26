@@ -22,7 +22,7 @@ export class AuthService {
     private static get _ssx(): SSX {
         return new SSX({
             enableDaoLogin: false,
-            resolveEns: true,
+            resolveEns: false,
             providers: {
                 web3: {
                     driver: window.ethereum,
