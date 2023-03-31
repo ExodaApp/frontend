@@ -5,7 +5,7 @@
 </script>
 
 
-<div class="flex flex-col items-center gap-56 font-syne w-full">
+<div class="flex flex-col items-center gap-48 font-syne w-full overflow-y-auto">
     <div class="flex flex-col items-center gap-16 text-center">
         <img src={logo} alt="exoda_logo" class="w-280"/>
         <h1 class="font-600 text-32">The Web3 expense tracking app</h1>
@@ -17,19 +17,18 @@
         <p class="text-14 font-jakarta">Start tracking your expenses now</p>
     </div>
 
-    <div class="grid grid-cols-3 p-8 gap-24 w-full h-200">
-        <div class="rounded-xl bg-primary p-16 relative">
+    <div class="grid grid-cols-1 laptop:grid-cols-3 p-8 gap-24 w-full">
+        <div class="flex flex-col rounded-xl bg-primary p-16 relative gap-10 laptop:gap-0 laptop:h-200">
             <h2 class="font-600 text-20">1. List your expenses</h2>
-            <p class="absolute bottom-16">List all your expenses and their respective fiat values. You can mix different fiat currencies</p>
+            <p class="laptop:absolute bottom-16">List all your expenses and their respective fiat values. You can mix different fiat currencies</p>
         </div>
-        <div class="rounded-xl bg-primary p-16 relative">
+        <div class="flex flex-col rounded-xl bg-primary p-16 relative gap-10 laptop:gap-0">
             <h2 class="font-600 text-20">2. Register Exchange</h2>
-            <p class="absolute bottom-16">Register the wallet of your exchange of choice. You can register multiple exchange wallets that will receive your tokens</p>
+            <p class="laptop:absolute bottom-16">Register the wallet of your exchange of choice. You can register multiple exchange wallets that will receive your tokens</p>
         </div>
-        <div class="rounded-xl bg-primary p-16 relative">
+        <div class="flex flex-col rounded-xl bg-primary p-16 relative gap-10 laptop:gap-0">
             <h2 class="font-600 text-20">3. Transfer tokens</h2>
-
-            <p class="absolute bottom-16">Transfer the tokens you want to sell to cover your monthly expenses to the exchange your choice</p>
+            <p class="laptop:absolute bottom-16">Transfer the tokens you want to sell to cover your monthly expenses to the exchange your choice</p>
         </div>
     </div>
 

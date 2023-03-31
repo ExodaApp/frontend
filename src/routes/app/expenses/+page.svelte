@@ -1,5 +1,6 @@
 <script lang="ts">
     import type { ActionData } from "@sveltejs/kit"
+    import { goto } from '$app/navigation';
 
     import Summary from './Summary.svelte'
     import Table from '$lib/components/Table.svelte'
@@ -19,6 +20,7 @@
     import { openModal } from '$lib/store/modal.store'
     import { user } from '$lib/store/user.store'
     import { expenses } from '$lib/store/expenses.store'
+    import { exchangeWallets } from '$lib/store/exchange-wallets.store'
 
     const tableHeaders = ['Expense', 'Due day', 'Currency', 'Value'] 
     let tableContent = []
@@ -44,8 +46,14 @@
     const openEditModal = (event) =>
         openModal({ component: CreateExpenses, data: event.detail, dismissible: true })
 
-    const openTransferModal = () =>
-        openModal({ component: TransferToExchange, dismissible: true })
+    const handleTransferToExchange = () => {
+        console.log(exchangeWallets)
+
+        if (!$exchangeWallets.length)
+            goto('/app/exchange-wallets')
+        else
+            openModal({ component: TransferToExchange, dismissible: true })
+    }
 </script>
 
 { #if $expenses.items.length }
@@ -70,7 +78,7 @@
         on:edit={openEditModal}
         on:delete={openDeleteModal}/>
     <div class="flex justify-end mt-20">
-        <Button on:click={openTransferModal}>Transfer to exchange</Button>
+        <Button on:click={handleTransferToExchange}>Transfer to exchange</Button>
     </div>
 { :else }
     <TableEmptyState header="No expenses yet"

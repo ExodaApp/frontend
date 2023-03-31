@@ -1,4 +1,6 @@
 <script lang="ts">
+    import "../app.css"
+
     import '@fontsource/lexend-deca'
     import '@fontsource/syne'
     import '@fontsource/plus-jakarta-sans'
@@ -9,13 +11,34 @@
     import Menu from '$lib/components/Menu.svelte'
     import Modal from '$lib/components/Modal.svelte'
     import LandingPage from '$lib/components/LandingPage.svelte'
-    import "../app.css"
+    import { ExpenseService } from '$lib/services/ExpenseService'
+    import { ExchangeWalletService } from '$lib/services/ExchangeWalletService'
+
+    import { setExpenses } from '$lib/store/expenses.store'
+    import { setExchangeWallets } from '$lib/store/exchange-wallets.store'
+
+    const fetchUserData = async () => {
+        await Promise.all([
+            fetchExpenses(),
+            fetchExchangeWallets(),
+        ])
+    }
+
+    const fetchExpenses = async () =>
+        setExpenses(await ExpenseService.getExpenses())
+
+    const fetchExchangeWallets = async () =>
+        setExchangeWallets(await ExchangeWalletService.getExchangeWallets())
+
+    user.subscribe(user => {
+        if (user.authenticated)
+            fetchUserData()
+    })
 </script>
 
 { #if $modal.open }
     <Modal/>
 {/if}
-
 
 { #if !$user.authenticated }
     <div class="flex justify-center items-center absolute  

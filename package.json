@@ -38,7 +38,7 @@
 	"type": "module",
 	"dependencies": {
 		"@ethersproject/providers": "^5.7.2",
-		"@exoda-app/tokens": "^0.0.6",
+		"@exoda-app/tokens": "^0.0.8",
 		"@fontsource/lexend-deca": "^4.5.14",
 		"@fontsource/plus-jakarta-sans": "^4.5.11",
 		"@fontsource/syne": "^4.5.13",

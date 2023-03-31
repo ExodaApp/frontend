@@ -16,6 +16,22 @@ export class WalletService {
     * Request connection between page and user's wallet
     */
     public static async connect(): Promise<string> {
+        await WalletService.getProvider()
+
+        return WalletService.getWalletAddress()
+    }
+
+    public static async setListeners(
+        chainSetter: (chain: number) => void,
+        addressSetter: (address: string) => void,
+    ): Promise<void> {
+        const provider = await detectEthereumProvider()
+
+        provider?.addListener('chainChanged', (chain: string) => chainSetter(parseInt(chain, 16)))
+        provider?.addListener('accountsChanged', (addresses: string) => addressSetter(addresses[0]))
+    }
+
+    public static async getProvider(): Promise<WalletProvider> {
         const provider = await detectEthereumProvider()
 
         if (!provider)
@@ -23,16 +39,7 @@ export class WalletService {
 
         WalletService._walletProvider = new Web3Provider(provider) as WalletProvider
 
-        return WalletService.getWalletAddress()
-    }
-
-    /**
-    * Signs arbitrary message using user's private key
-    *
-    * @return signature
-    */
-    public static async signMessage(message: string): Promise<string> {
-        return WalletService.signer.signMessage(message)
+        return WalletService._walletProvider
     }
 
     /**
@@ -42,8 +49,11 @@ export class WalletService {
         return (await WalletService._request('eth_requestAccounts'))[0]
     }
 
-    public static get signer(): JsonRpcSigner {
-        return WalletService.walletProvider.getSigner()
+    public static async getSigner(): Promise<JsonRpcSigner> {
+        if (!WalletService._walletProvider)
+            await WalletService.getProvider()
+
+        return WalletService._walletProvider.getSigner()
     }
 
     public static get walletProvider(): WalletProvider {

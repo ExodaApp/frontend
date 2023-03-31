@@ -18,13 +18,14 @@
     $: hasExchangeWallets = !!tableContent.length
     $: tableContent = exchangeWalletsToTableContent($exchangeWallets)
 
-    const exchangeWalletsToTableContent = (exchangeWallets: IExchangeWallet[]) => exchangeWallets.map(wallet => ({
-        id: wallet.id,
-        content: [
-            wallet.name,
-            wallet.address,
-        ],
-    }))
+    const exchangeWalletsToTableContent = (exchangeWallets: IExchangeWallet[]) =>
+        exchangeWallets.map(wallet => ({
+            id: wallet.id,
+            content: [
+                wallet.name,
+                wallet.address,
+            ],
+        }))
 
     const openEditModal = (event) =>
         openModal({ component: CreateExchangeWallet, data: event.detail, dismissible: true })
@@ -52,7 +53,7 @@
         on:edit={openEditModal}
         on:delete={openDeleteModal}/>
 { :else }
-    <TableEmptyState header="No expenses yet"
-        message="Click on &quot;Create&quot; and start tracking your expenses"/>
+    <TableEmptyState header="No exchange wallets yet"
+        message="Create one by clicking on &quot;Create&quot; and then go back to expenses to transfer the funds"/>
 { /if }
 

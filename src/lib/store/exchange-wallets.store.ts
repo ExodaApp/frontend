@@ -1,8 +1,11 @@
-import { writable } from 'svelte/store'
-import type { IExpense } from '$lib/interfaces/IExpense'
+import { writable, get } from 'svelte/store'
+import type { IExchangeWallet } from '$lib/interfaces/IExchangeWallet'
 
-export const exchangeWallets = writable<IExpense[]>([])
+export const exchangeWallets = writable<IExchangeWallet[]>([])
 
-export const setExchangeWallets = (_exchangeWallets: IExpense[]) => {
+export const setExchangeWallets = (_exchangeWallets: IExchangeWallet[]) => {
     exchangeWallets.set(_exchangeWallets)
 }
+
+export const getExchange = (exchangeId: number): IExchangeWallet | undefined =>
+    get(exchangeWallets).find(wallet => wallet.id === exchangeId)
