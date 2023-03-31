@@ -1,6 +1,7 @@
 <script lang="ts">
     import { closeModal } from '$lib/store/modal.store'
-    import { user, setUserAddress } from '$lib/store/user.store'
+    import { user, setUserAuthenticated } from '$lib/store/user.store'
+    import { setChain, setAddress, setEthereum } from '$lib/store/ethereum.store'
 
     import { WalletService } from '$lib/services/WalletService'
     import { AuthService } from '$lib/services/AuthService'
@@ -14,15 +15,18 @@
         try {
             loading = true
 
-            const address = await AuthService.auth()
+            const { address, chainId } = await AuthService.auth()
             const user = await UserService.getUser(address)
+            await WalletService.setListeners(setChain, setAddress)
 
             if (!user)
                 await UserService.createUser(address)
 
             closeModal()
-            setUserAddress(address)
+            setUserAuthenticated()
+            setEthereum(chainId, address)
         } catch (error) {
+            console.log(error)
             // TODO: call toast
         } finally {
             loading = false

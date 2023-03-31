@@ -6,7 +6,7 @@
     import type { IExchangeWallet } from '$lib/interfaces/IExchangeWallet'
     import { user } from '$lib/store/user.store'
     import { openModal } from '$lib/store/modal.store'
-    import { exchangeWallets, setExchangeWallets } from '$lib/store/exchange-wallets.store'
+    import { exchangeWallets } from '$lib/store/exchange-wallets.store'
     import { ExchangeWalletService } from '$lib/services/ExchangeWalletService'
 
     import Add from '$lib/icons/Add.svelte'
@@ -17,21 +17,15 @@
 
     $: hasExchangeWallets = !!tableContent.length
     $: tableContent = exchangeWalletsToTableContent($exchangeWallets)
-    $: {
-        if ($user.authenticated)
-            fetchExchangeWallets()
-    }
 
-    const fetchExchangeWallets = async () =>
-        setExchangeWallets(await ExchangeWalletService.getExchangeWallets())
-
-    const exchangeWalletsToTableContent = (exchangeWallets: IExchangeWallet[]) => exchangeWallets.map(wallet => ({
-        id: wallet.id,
-        content: [
-            wallet.name,
-            wallet.address,
-        ],
-    }))
+    const exchangeWalletsToTableContent = (exchangeWallets: IExchangeWallet[]) =>
+        exchangeWallets.map(wallet => ({
+            id: wallet.id,
+            content: [
+                wallet.name,
+                wallet.address,
+            ],
+        }))
 
     const openEditModal = (event) =>
         openModal({ component: CreateExchangeWallet, data: event.detail, dismissible: true })
@@ -59,7 +53,7 @@
         on:edit={openEditModal}
         on:delete={openDeleteModal}/>
 { :else }
-    <TableEmptyState header="No expenses yet"
-        message="Click on &quot;Create&quot; and start tracking your expenses"/>
+    <TableEmptyState header="No exchange wallets yet"
+        message="Create one by clicking on &quot;Create&quot; and then go back to expenses to transfer the funds"/>
 { /if }
 

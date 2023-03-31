@@ -3,7 +3,7 @@
     import Button from '$lib/components/Button.svelte'
     import type { IExchangeWallet } from '$lib/interfaces/IExchangeWallet'
     import { closeModal } from '$lib/store/modal.store'
-    import { user } from '$lib/store/user.store'
+    import { ethereum } from '$lib/store/ethereum.store'
     import { exchangeWallets, setExchangeWallets } from '$lib/store/exchange-wallets.store'
     import { ExchangeWalletService } from '$lib/services/ExchangeWalletService'
 
@@ -28,7 +28,7 @@
             
             await handler()
 
-            setExchangeWallets(await ExchangeWalletService.getExchangeWallets($user.address))
+            setExchangeWallets(await ExchangeWalletService.getExchangeWallets($ethereum.address))
 
             // TODO: add toast
         } catch (error) {

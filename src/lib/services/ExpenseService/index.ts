@@ -6,7 +6,7 @@ import z from 'zod'
 const ExpenseSchema = z.object({
     id: z.number(),
     name: z.string(),
-    dueDay: z.number().gt(0).lte(31),
+    dueDay: z.number().gt(-1).lte(31),
     value: z.number(),
     userAddress: z.string().length(42),
     currency: z.string().length(3),

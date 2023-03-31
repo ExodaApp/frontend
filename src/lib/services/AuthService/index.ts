@@ -10,13 +10,13 @@ export class AuthService {
     *
     * @return user address or throws
     */
-    public static async auth(): Promise<string> {
-        const { address } = await AuthService._ssx.signIn()
+    public static async auth(): Promise<{ address: string, chainId: number }> {
+        const { address, chainId } = await AuthService._ssx.signIn()
 
         if (!address)
             throw new Error('AuthService::auth: address no present on response from the server')
 
-        return address
+        return { address, chainId }
     }
 
     private static get _ssx(): SSX {

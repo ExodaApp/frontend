@@ -1,4 +1,6 @@
 <script lang="ts">
+    import "../app.css"
+
     import '@fontsource/lexend-deca'
     import '@fontsource/syne'
     import '@fontsource/plus-jakarta-sans'
@@ -9,7 +11,29 @@
     import Menu from '$lib/components/Menu.svelte'
     import Modal from '$lib/components/Modal.svelte'
     import LandingPage from '$lib/components/LandingPage.svelte'
-    import "../app.css"
+    import { ExpenseService } from '$lib/services/ExpenseService'
+    import { ExchangeWalletService } from '$lib/services/ExchangeWalletService'
+
+    import { setExpenses } from '$lib/store/expenses.store'
+    import { setExchangeWallets } from '$lib/store/exchange-wallets.store'
+
+    const fetchUserData = async () => {
+        await Promise.all([
+            fetchExpenses(),
+            fetchExchangeWallets(),
+        ])
+    }
+
+    const fetchExpenses = async () =>
+        setExpenses(await ExpenseService.getExpenses())
+
+    const fetchExchangeWallets = async () =>
+        setExchangeWallets(await ExchangeWalletService.getExchangeWallets())
+
+    user.subscribe(user => {
+        if (user.authenticated)
+            fetchUserData()
+    })
 </script>
 
 { #if $modal.open }
@@ -28,8 +52,7 @@
         </div>
     </div>
 { /if }
-
-<div class="w-full h-screen bg-[url('/app-bg.jpg')] bg-repeat bg-cover bg-center flex flex-col text-white font-jakarta">
+<div class="w-full h-screen bg-[url('/app-bg.jpg')] bg-repeat bg-cover bg-center flex flex-col text-white font-jakarta pb-20">
     <!-- Header -->
     <div class="w-full flex items-center justify-center px-16 tablet:px-32 pt-16">
         <div class="flex items-center justify-center laptop:max-w-default w-full">

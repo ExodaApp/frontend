@@ -22,6 +22,7 @@ module.exports = {
             transparent: 'transparent',
             primary: 'rgba(92, 26, 233, 0.5)',
             'primary-solid': 'rgba(92, 26, 233, 1)',
+            'primary-light': 'rgba(108,48,235, 1)',
             white: '#CBCBCB',
             'off-white': 'rgba(255, 255, 255, 0.60)',
             'dark-solid': 'rgba(0, 0, 0, 1)',

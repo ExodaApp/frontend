@@ -3,6 +3,7 @@
     import type { IExpense } from '$lib/interfaces/IExpense'
     import Button from '$lib/components/Button.svelte'
     import Input from '$lib/components/Input.svelte'
+    import Select from '$lib/components/Select.svelte'
 
     import { expenses, setExpenses } from '$lib/store/expenses.store'
     import { user } from '$lib/store/user.store'
@@ -18,10 +19,8 @@
     }
 
     $: {
-        if (data) {
+        if (data)
             expense = $expenses.items.find(expense => expense.id === data)
-        }
-            
     }
 
     const handleSubmit = async () => {
@@ -71,7 +70,17 @@
 
     <div>
         <label class="text-14">Currency</label>
-        <Input bind:value={expense.currency} />
+        <Select
+            bind:value={expense.currency}
+            emptyState="Select a currency"
+            selected={{ id: 'USD', value: '🇺🇸 USD' }}
+            options={[
+                { id: 'USD', value: '🇺🇸 USD' },
+                { id: 'BRL', value: '🇧🇷 BRL' },
+                { id: 'CAD', value: '🇨🇦 CAD' },
+                { id: 'ARS', value: '🇦🇷 ARS' },
+            ]}
+        />
     </div>
 
     <div>

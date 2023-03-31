@@ -30,7 +30,7 @@
 <div style="{cssVarStyles}" class="hidden laptop:block">
     <div class="[ table ] mb-12 grid gap-y-10">
         { #each headers as header, i }
-            <div class="px-32 pt-16
+            <div class="px-32
                 font-syne font-600
                 text-off-white "
                 class:rounded-l-xl={ i === 0 }
