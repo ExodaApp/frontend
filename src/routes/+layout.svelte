@@ -36,6 +36,10 @@
     })
 </script>
 
+<head>
+    <title>Exoda - Web3 expenses</title>
+</head>
+
 { #if $modal.open }
     <Modal/>
 {/if}
