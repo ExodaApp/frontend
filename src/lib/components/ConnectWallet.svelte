@@ -1,4 +1,6 @@
 <script lang="ts">
+    import { goto } from '$app/navigation';
+
     import { closeModal } from '$lib/store/modal.store'
     import { user, setUserAuthenticated } from '$lib/store/user.store'
     import { setChain, setAddress, setEthereum } from '$lib/store/ethereum.store'
@@ -25,9 +27,10 @@
             closeModal()
             setUserAuthenticated()
             setEthereum(chainId, address)
+
+            goto('/app/expenses')
         } catch (error) {
             console.log(error)
-            // TODO: call toast
         } finally {
             loading = false
         }
