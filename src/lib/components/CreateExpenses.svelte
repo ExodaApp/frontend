@@ -13,8 +13,8 @@
     let loading: boolean
     let expense: IExpense = {
         name: '',
-        dueDay: 0,
-        value: 0,
+        dueDay: '',
+        value: '',
         currency: '',
     }
 
@@ -60,12 +60,12 @@
 
     <div>
         <label class="text-14">Expense name</label>
-        <Input bind:value={expense.name} />
+        <Input bind:value={expense.name} placeholder="Internet bill"/>
     </div>
 
     <div>
         <label class="text-14">Due day</label>
-        <Input bind:value={expense.dueDay} />
+        <Input bind:value={expense.dueDay} placeholder="5" type="number"/>
     </div>
 
     <div>
@@ -85,7 +85,7 @@
 
     <div>
         <label class="text-14">Value</label>
-        <Input bind:value={expense.value} />
+        <Input bind:value={expense.value} placeholder="150" type="number"/>
     </div>
 
     <div class="flex justify-end">

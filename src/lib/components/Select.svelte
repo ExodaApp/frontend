@@ -38,7 +38,7 @@
   <div>
     <button
       type="button"
-      class="inline-flex justify-center items-center w-full
+      class="inline-flex items-center w-full
         border-2 border-dark-2 rounded-md
         py-8 px-6 bg-dark-2 text-sm font-medium
         text-gray-700 hover:bg-gray-50 focus:border-primary"
