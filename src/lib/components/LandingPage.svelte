@@ -23,7 +23,7 @@
             <p class="laptop:absolute bottom-16">List all your expenses and their respective fiat values. You can mix different fiat currencies</p>
         </div>
         <div class="flex flex-col rounded-xl bg-primary p-16 relative gap-10 laptop:gap-0">
-            <h2 class="font-600 text-20">2. Register Exchange</h2>
+            <h2 class="font-600 text-20">2. Exchange address book</h2>
             <p class="laptop:absolute bottom-16">Register the wallet of your exchange of choice. You can register multiple exchange wallets that will receive your tokens</p>
         </div>
         <div class="flex flex-col rounded-xl bg-primary p-16 relative gap-10 laptop:gap-0">
