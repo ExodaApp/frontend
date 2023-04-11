@@ -79,6 +79,7 @@
                 { id: 'BRL', value: '🇧🇷 BRL' },
                 { id: 'CAD', value: '🇨🇦 CAD' },
                 { id: 'ARS', value: '🇦🇷 ARS' },
+                { id: 'JPY', value: '🇯🇵 JPY' },
             ]}
         />
     </div>
