@@ -8,8 +8,10 @@
     import { WalletService } from '$lib/services/WalletService'
     import { AuthService } from '$lib/services/AuthService'
     import { UserService } from '$lib/services/UserService'
+    import { TokenService } from '$lib/services/TokenService'
 
     import Button from '$lib/components/Button.svelte'
+	import { setWallet } from '$lib/store/wallet.store';
 
     let loading = false
 
@@ -18,8 +20,11 @@
             loading = true
 
             const { address, chainId } = await AuthService.auth()
-            const user = await UserService.getUser(address)
-            await WalletService.setListeners(setChain, setAddress)
+            const [ tokensInfo, user ] = await Promise.all([
+                TokenService.getTokens(address),
+                UserService.getUser(address),
+                WalletService.setListeners(setChain, setAddress),
+            ])
 
             if (!user)
                 await UserService.createUser(address)
@@ -27,6 +32,10 @@
             closeModal()
             setUserAuthenticated()
             setEthereum(chainId, address)
+            setWallet({
+                tokens: tokensInfo.assets,
+                totalUsdBalance: tokensInfo.totalBalanceUsd,
+            })
 
             goto('/app/expenses')
         } catch (error) {

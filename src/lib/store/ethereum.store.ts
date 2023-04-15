@@ -19,20 +19,14 @@ export const setEthereum = (chain: number, address: string) => {
     }))
 }
 
-export const setChain = (chain: number) => {
-    console.log({ chain })
-
+export const setChain = (chain: number) =>
     ethereum.update(ethereum => ({
         ...ethereum,
         chain,
     }))
-}
 
-export const setAddress = (address: string) => {
-    console.log({ address })
-
+export const setAddress = (address: string) =>
     ethereum.update(ethereum => ({
         ...ethereum,
         address,
     }))
-}
