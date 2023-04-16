@@ -38,7 +38,11 @@
     }
 
     const getToken = async () => {
-        token = await Token.initialize(tokenAddress, $ethereum.chain, $ethereum.address)
+        token = await Token.initialize({
+            address: tokenAddress,
+            chain: $ethereum.chain,
+            user: $ethereum.address,
+        })
     }
 
     const sendTransaction = async () => {
