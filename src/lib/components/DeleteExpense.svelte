@@ -7,6 +7,7 @@
     import { user } from '$lib/store/user.store'
     import { setExpenses } from '$lib/store/expenses.store'
     import { closeModal } from '$lib/store/modal.store'
+	import { ToastType, setToast } from '$lib/store/toast.store';
 
     export let data: any
     let loading = false
@@ -18,9 +19,11 @@
             await ExpenseService.deleteExpense(data)
 
             setExpenses(await ExpenseService.getExpenses())
-            // TODO: call toast
-        } catch (error) {
-            // TODO: call toast
+        } catch (error: any) {
+            setToast({
+                type: ToastType.ERROR,
+                message: error.message,
+            })
         } finally {
             loading = false
             closeModal()

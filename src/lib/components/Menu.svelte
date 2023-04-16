@@ -39,7 +39,7 @@
             <a href="">
                 <div class="flex rounded-full h-full p-8 laptop:py-16 items-center justify-center"
                     class:bg-primary="{ active === MenuItem.TRANSACTIONS }">
-                    <span>Transactions (Soon)</span>
+                    <span>Analytics (Soon)</span>
                 </div>
             </a>
         </div>

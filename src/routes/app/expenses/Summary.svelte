@@ -4,6 +4,11 @@
     import BarChart from '$lib/icons/BarChart.svelte'
     import { expenses } from '$lib/store/expenses.store'
 	import { wallet } from '$lib/store/wallet.store';
+
+
+    $: {
+        console.log({ expenses: $expenses })
+    }
 </script>
 
 <div class="hidden grid-cols-3 gap-24 tablet:gap-32 tablet:grid
@@ -21,7 +26,7 @@
         py-32
         rounded-3xl bg-transparent tablet:bg-primary shadow-2xl tablet:shadow-[0px_3.35px_32px_rgba(99,31,211,0.9)] tablet:border border-primary">
         <Send class="h-32 tablet:h-40"/>
-        $ { $expenses.totalUsdValue }
+        $ { $expenses.totalUsdValue ? $expenses.totalUsdValue.toFixed(2) : 0 }
         <span class="text-16 tablet:text-24 font-600 tablet:font-400">
             per month
         </span>
@@ -48,7 +53,7 @@
 
     <div class="flex flex-col items-center">
         <Send class="h-24"/>
-        <p class="text-20">$ { $expenses.totalUsdValue }</p>
+        <p class="text-20">$ { $expenses.totalUsdValue ? $expenses.totalUsdValue.toFixed(2) : 0 }</p>
         <p>per month</p>
     </div>
 

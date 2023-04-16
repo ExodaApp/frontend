@@ -12,6 +12,7 @@
 
     import Button from '$lib/components/Button.svelte'
 	import { setWallet } from '$lib/store/wallet.store';
+	import { ToastType, setToast } from '$lib/store/toast.store';
 
     let loading = false
 
@@ -38,8 +39,11 @@
             })
 
             goto('/app/expenses')
-        } catch (error) {
-            console.log(error)
+        } catch (error: any) {
+            setToast({
+                type: ToastType.ERROR,
+                message: error.message,
+            })
         } finally {
             loading = false
         }

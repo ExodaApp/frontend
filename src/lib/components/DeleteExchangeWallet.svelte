@@ -4,9 +4,9 @@
     import Button from '$lib/components/Button.svelte'
     import { ExchangeWalletService } from '$lib/services/ExchangeWalletService'
 
-    import { user } from '$lib/store/user.store'
     import { setExchangeWallets } from '$lib/store/exchange-wallets.store'
     import { closeModal } from '$lib/store/modal.store'
+	import { ToastType, setToast } from '$lib/store/toast.store';
 
     export let data: any
     let loading = false
@@ -18,9 +18,11 @@
             await ExchangeWalletService.deleteExchangeWallet(data)
 
             setExchangeWallets(await ExchangeWalletService.getExchangeWallets())
-            // TODO: call toast
-        } catch (error) {
-            // TODO: call toast
+        } catch (error: any) {
+            setToast({
+                type: ToastType.ERROR,
+                message: error.message,
+            })
         } finally {
             loading = false
             closeModal()

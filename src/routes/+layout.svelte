@@ -7,6 +7,7 @@
 
     import { user } from '$lib/store/user.store'
     import { modal, openModal, closeModal } from '$lib/store/modal.store'
+    import { toast } from '$lib/store/toast.store'
 
     import Menu from '$lib/components/Menu.svelte'
     import Modal from '$lib/components/Modal.svelte'
@@ -16,6 +17,7 @@
 
     import { setExpenses } from '$lib/store/expenses.store'
     import { setExchangeWallets } from '$lib/store/exchange-wallets.store'
+	import Toast from "$lib/components/Toast.svelte";
 
     const fetchUserData = async () => {
         await Promise.all([
@@ -40,6 +42,10 @@
     <title>Exoda - Web3 expenses</title>
 </head>
 
+{ #if $toast.open }
+    <Toast/>
+{/if}
+
 { #if $modal.open }
     <Modal/>
 {/if}
@@ -57,6 +63,7 @@
     </div>
 { /if }
 <div class="w-full h-screen bg-[url('/app-bg.jpg')] bg-repeat bg-cover bg-center flex flex-col text-white font-jakarta pb-20">
+
     <!-- Header -->
     <div class="w-full flex items-center justify-center px-16 tablet:px-32 pt-16">
         <div class="flex items-center justify-center laptop:max-w-default w-full">

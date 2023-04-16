@@ -21,9 +21,12 @@ module.exports = {
         colors: {
             transparent: 'transparent',
             primary: 'rgba(92, 26, 233, 0.5)',
+            white: '#CBCBCB',
+            red: '#cc2936',
+            yellow: '#fabc2a',
+            green: '#448c2a',
             'primary-solid': 'rgba(92, 26, 233, 1)',
             'primary-light': 'rgba(108,48,235, 1)',
-            white: '#CBCBCB',
             'off-white': 'rgba(255, 255, 255, 0.60)',
             'dark-solid': 'rgba(0, 0, 0, 1)',
             'dark-0': 'rgba(0, 0, 0, 0.8)',
@@ -31,9 +34,6 @@ module.exports = {
             'dark-2': 'rgba(17, 17, 17, 0.75)',
             'dark-3': 'rgba(21, 21, 21, 0.90)',
             'dark-4': 'rgba(33, 33, 33, 0.5)',
-            red: '#cc2936',
-            yellow: '#fabc2a',
-            green: '#59cd90',
         },
 
         spacing: {
@@ -72,6 +72,7 @@ module.exports = {
             default: 1440,
             app: 998 + (48 * 2),
             modal: 430 + (48 * 2),
+            400: '400px',
             // search: 430,
             // login: 390 + (48 * 2),
             // screen: '100vw',

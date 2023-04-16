@@ -6,6 +6,7 @@
     import { ethereum } from '$lib/store/ethereum.store'
     import { exchangeWallets, setExchangeWallets } from '$lib/store/exchange-wallets.store'
     import { ExchangeWalletService } from '$lib/services/ExchangeWalletService'
+	import { ToastType, setToast } from '$lib/store/toast.store';
 
     export let data: any
     let loading: boolean
@@ -30,9 +31,11 @@
 
             setExchangeWallets(await ExchangeWalletService.getExchangeWallets($ethereum.address))
 
-            // TODO: add toast
-        } catch (error) {
-            // TODO: add toast 
+        } catch (error: any) {
+            setToast({
+                type: ToastType.ERROR,
+                message: error.message
+            })
         } finally {
             loading = false
             closeModal()

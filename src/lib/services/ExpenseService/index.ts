@@ -2,6 +2,7 @@ import axios from 'axios'
 import { PUBLIC_EXODA_API } from '$env/static/public'
 import type { IExpense } from '$lib/interfaces/IExpense'
 import z from 'zod'
+import BigNumber from 'bignumber.js'
 
 const ExpenseSchema = z.object({
     id: z.number(),
@@ -14,7 +15,7 @@ const ExpenseSchema = z.object({
 
 const GetExpensesSchema = z.object({
     items: ExpenseSchema.array(),
-    totalUsdValue: z.string()
+    totalUsdValue: z.string().transform(total => new BigNumber(total))
 })
 
 export class ExpenseService {
