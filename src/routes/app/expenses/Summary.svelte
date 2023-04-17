@@ -4,11 +4,6 @@
     import BarChart from '$lib/icons/BarChart.svelte'
     import { expenses } from '$lib/store/expenses.store'
 	import { wallet } from '$lib/store/wallet.store';
-
-
-    $: {
-        console.log({ expenses: $expenses })
-    }
 </script>
 
 <div class="hidden grid-cols-3 gap-24 tablet:gap-32 tablet:grid
