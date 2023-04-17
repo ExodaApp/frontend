@@ -86,6 +86,7 @@ module.exports = {
 
         maxHeight: {
             'landing-images': 600,
+            '250': '250px',
         },
 
         fontSize: {

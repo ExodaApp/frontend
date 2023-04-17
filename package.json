@@ -39,7 +39,7 @@
 	"type": "module",
 	"dependencies": {
 		"@ethersproject/providers": "^5.7.2",
-		"@exoda-app/tokens": "^0.0.17",
+		"@exoda-app/tokens": "^0.0.18",
 		"@fontsource/lexend-deca": "^4.5.14",
 		"@fontsource/plus-jakarta-sans": "^4.5.11",
 		"@fontsource/syne": "^4.5.13",
@@ -48,6 +48,7 @@
 		"axios": "^1.3.2",
 		"bignumber.js": "^9.1.1",
 		"ethers": "^5.7.2",
+		"fuse.js": "^6.6.2",
 		"zod": "^3.20.6"
 	}
 }

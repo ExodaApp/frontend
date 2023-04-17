@@ -31,8 +31,8 @@ const ankrChainToExodaChain: Record<AnkrChain, Chain> = {
 } as const
 
 const AnkrTokenSchema = z.object({
-    balance: z.string().transform(balance => new BigNumber(balance)),
-    balanceRawInteger: z.string().transform(balanceRaw => new BigNumber(balanceRaw)),
+    balance: z.string(),
+    balanceRawInteger: z.string(),
     balanceUsd: z.string().transform(balanceUsd => new BigNumber(balanceUsd)),
     blockchain: z.enum(ankrChains).transform((chain)=> ankrChainToExodaChain[chain]),
     contractAddress: z.string().nullish(),
@@ -43,16 +43,23 @@ const AnkrTokenSchema = z.object({
     tokenPrice: z.string().transform(price => new BigNumber(price)),
     tokenSymbol: z.string(),
     tokenType: z.string(),
-}).transform(token => new Token(
-    token.tokenSymbol,
-    token.tokenPrice.toNumber(),
-    token.blockchain,
-    token.contractAddress || NATIVE_ADDRESS,
-    token.tokenName,
-    token.tokenDecimals,
-    '0',
-    providers[token.blockchain]
-))
+}).transform(ankrToken => {
+    const token = new Token(
+        ankrToken.tokenSymbol,
+        ankrToken.tokenPrice.toNumber(),
+        ankrToken.thumbnail,
+        ankrToken.blockchain,
+        ankrToken.contractAddress || NATIVE_ADDRESS,
+        ankrToken.tokenName,
+        ankrToken.tokenDecimals,
+        '0',
+        providers[ankrToken.blockchain]
+    )
+
+    token.setBalance(ankrToken.balanceRawInteger)
+
+    return token
+})
 
 
 const AnkrResponseSchema = z.object({
